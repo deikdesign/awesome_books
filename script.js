@@ -25,14 +25,13 @@ function addBook() {
     console.log(books);
 };
 
+
 for (let i =0; i < books.length; i++) {
-    document.getElementById('book-list').innerHTML +=`
-    <li class="book-card">
-      <p>${books[i].title}</p>
-      <p>${books[i].author}</p>
-      <button>Remove</button>
-    </li>`;
+  document.getElementById('book-list').innerHTML +=`
+  <li class="book-card">
+    <p>${books[i].title}</p>
+    <p>${books[i].author}</p>
+    <button>Remove</button>
+  </li>`;
 };
-
-
 
