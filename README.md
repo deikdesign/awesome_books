@@ -21,7 +21,7 @@ In order to run the application you need to have a web browse or an editor:
 
 * 1 - Make a clone of the repository: https://github.com/deikdesign/awesome_books.git
 * 2 - Open the project directory with your code editor.
-* 3 - Run liver server
+* 3 - Run live server
 * 4 - Try to add books to the shelf
 * 5 - Enjoy!
 
@@ -30,8 +30,8 @@ In order to run the application you need to have a web browse or an editor:
 
 👤 **Dante Alvarez**
 
-- GitHub: [@githubhandle]()
-- Twitter: [@twitterhandle]()
+- GitHub: [@githubhandle](https://github.com/danalvrz)
+- Twitter: [@twitterhandle](https://twitter.com/danalvrz)
 
 👤 **Deyan Todorov**
 

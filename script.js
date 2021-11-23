@@ -40,11 +40,18 @@ function addBook() {
 }
 
 function removeBook(id) {
-  const bookDeleted = id.replace('remove', '');
-  books.splice(bookDeleted, 1);
+  books = books.filter(book => book != id);
   catchValue();
   displayBooks();
-}
+  }
+
+
+// function removeBook(id) {
+//   const bookDeleted = id.replace('remove', '');
+//   books.splice(bookDeleted, 1);
+//   catchValue();
+//   displayBooks();
+// }
 
 function getValue() {
   if (localStorage.getItem('books')) {
