@@ -25,7 +25,7 @@ function catchValue() {
   const saveCollection = JSON.stringify(books);
   localStorage.setItem('books', saveCollection);
 }
-
+/* eslint-disable no-unused-vars */
 function addBook() {
   const newBook = {};
   newBook.title = document.getElementById('title').value;
@@ -38,7 +38,7 @@ function addBook() {
     displayBooks();
   }
 }
-
+/* eslint-disable no-unused-vars */
 function removeBook(id) {
   const bookDeleted = id.replace('remove', '');
   books.splice(bookDeleted, 1);
