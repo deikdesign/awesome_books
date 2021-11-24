@@ -1,6 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable prefer-const */
-/* eslint-disable radix */
 /* eslint-disable max-classes-per-file */
 
 class Book {
@@ -84,6 +82,6 @@ addBtn.addEventListener('click', () => {
 });
 
 function removeB() {
-  const removeId = parseInt(window.event.target.id.replace('remove', ''));
+  const removeId = parseInt(window.event.target.id.replace('remove', ''), 10);
   myShelf.removeBook(removeId);
 }
