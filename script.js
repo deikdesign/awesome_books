@@ -14,6 +14,7 @@ class Shelf {
     this.books = [];
   }
 
+
   // Store book array
   saveValue() {
     const saveCollection = JSON.stringify(this.books);
