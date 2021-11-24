@@ -1,41 +1,44 @@
-class newBook {
-  constructor(title, author, idBook) {
+class Book {
+  constructor(title, author, id) {
     this.title = title;
     this.author = author;
-    this.idBook = idBook;
+    this.id = id;
   }
 }
 
-class books {
+class Shelf {
   constructor() {
     this.books = [];
   }
   // Store book array
   saveValue() {
-    const saveCollection = JSON.stringify(books);
+    const saveCollection = JSON.stringify(this.books);
     localStorage.setItem("books", saveCollection);
   }
   // Get book array
   getValue() {
     if (localStorage.getItem("books")) {
       this.books = JSON.parse(localStorage.getItem("books"));
-      catchValue();
+      this.saveValue();
     }
   }
   // Add book to array
   addBook(title, author) {
-    const currentBook = new newBook(title, author);
-    currentBook.idBook = this.books.length + 1;
+    const currentBook = new Book(title, author);
+    currentBook.id = parseInt(Math.random() * 1000000000, 10);
     if (currentBook.title !== "" && currentBook.author !== "") {
       this.books.push(currentBook);
       document.getElementById("title").value = "";
       document.getElementById("author").value = "";
+      this.saveValue();
       this.displayBooks();
     }
   }
   // Remove book from array
-  removeBook(idBook) {
-    this.books = this.books.filter((id) => id !== idBook);
+  removeBook(id) {
+    let newBooks = this.books.filter((book) => book.id !== id);
+    this.books = newBooks;
+    this.saveValue();
     this.displayBooks();
   }
   // Display books
@@ -46,36 +49,31 @@ class books {
     <li class="book-card">
       <p>${this.books[i].title}</p>
       <p>${this.books[i].author}</p>
-      <button id="remove${this.books[i].idBook}"class="remove">Remove</button>
+      <button id="remove${this.books[i].id}"class="remove" onclick="removeB()">Remove</button>
     </li>`;
     }
   }
 }
 
-const myBooks = new books();
-const addNewBook = new newBook("title uno", "author uno", "1");
-const addNewBook2 = new newBook("title dos", "author dos", "2");
-myBooks.books.push(addNewBook);
-myBooks.books.push(addNewBook2);
+const myShelf = new Shelf();
+const addNewBook = new Book("title uno", "author uno", 570968217);
+const addNewBook2 = new Book("title dos", "author dos", 570668217);
+const addNewBook3 = new Book("title tres", "author tres", 570963217);
+myShelf.books.push(addNewBook);
+myShelf.books.push(addNewBook2);
+myShelf.books.push(addNewBook3);
 
-myBooks.displayBooks();
-
-const removeButtons = document.querySelectorAll(".remove");
-
-document.querySelectorAll(".remove").forEach((item) => {
-  item.addEventListener("click", () => {
-    console.log(myBooks.books);
-  });
-});
+myShelf.getValue();
+myShelf.displayBooks();
 
 const addBtn = document.querySelector("#add");
 addBtn.addEventListener("click", () => {
   let currentTitle = document.querySelector("#title").value;
   let currentAuthor = document.querySelector("#author").value;
-  myBooks.addBook(currentTitle, currentAuthor);
+  myShelf.addBook(currentTitle, currentAuthor);
 });
 
-let arr = [1, 2, 3, 4,5,6,7];
-const idx = 3;
-
-arr = arr.filter((id) => id !== idx);
+function removeB() {
+  let removeId = parseInt(window.event.target.id.replace("remove", ""));
+  myShelf.removeBook(removeId);
+}
