@@ -1,65 +1,87 @@
-let books = [
-  {
-    title: 'Uno Lorem',
-    author: 'Testero Testy',
-    id: 570968217,
-  },
-  {
-    title: 'Dos Lorem',
-    author: 'Testero Testy2',
-    id: 570968218,
-  },
-];
-
-function displayBooks() {
-  document.getElementById('book-list').innerHTML = '';
-  for (let i = 0; i < books.length; i += 1) {
-    document.getElementById('book-list').innerHTML += `
-  <li class="book-card">
-    <p>${books[i].title}</p>
-    <p>${books[i].author}</p>
-    <button id="remove${books[i].id}"class="remove" onclick="removeBook(this.id)">Remove</button>
-  </li>`;
-  }
-}
-
-function catchValue() {
-  const saveCollection = JSON.stringify(books);
-  localStorage.setItem('books', saveCollection);
-}
 /* eslint-disable no-unused-vars */
-function addBook() {
-  const newBook = {};
-  newBook.title = document.getElementById('title').value;
-  newBook.author = document.getElementById('author').value;
-  newBook.id = parseInt(Math.random() * 1000000000, 10);
-  if (newBook.title !== '' && newBook.author !== '') {
-    books.push(newBook);
-    document.getElementById('title').value = '';
-    document.getElementById('author').value = '';
-    catchValue();
-    displayBooks();
+/* eslint-disable max-classes-per-file */
+
+class Book {
+  constructor(title, author, id) {
+    this.title = title;
+    this.author = author;
+    this.id = id;
   }
 }
 
-/* eslint-disable no-unused-vars */
-/* eslint-disable prefer-const */
-/* eslint-disable radix */
-function removeBook(id) {
-  const bookDeleted = parseInt(id.replace('remove', ''));
-  let newBooks = books.filter((item) => item.id !== bookDeleted);
-  books = newBooks;
-  catchValue();
-  displayBooks();
-}
+class Shelf {
+  constructor() {
+    this.books = [];
+  }
 
-function getValue() {
-  if (localStorage.getItem('books')) {
-    books = JSON.parse(localStorage.getItem('books'));
-    catchValue();
+  // Store book array
+  saveValue() {
+    const saveCollection = JSON.stringify(this.books);
+    localStorage.setItem('books', saveCollection);
+  }
+
+  // Get book array
+  getValue() {
+    if (localStorage.getItem('books')) {
+      this.books = JSON.parse(localStorage.getItem('books'));
+      this.saveValue();
+    }
+  }
+
+  // Add book to array
+  addBook(title, author) {
+    const currentBook = new Book(title, author);
+    currentBook.id = parseInt(Math.random() * 1000000000, 10);
+    if (currentBook.title !== '' && currentBook.author !== '') {
+      this.books.push(currentBook);
+      document.getElementById('title').value = '';
+      document.getElementById('author').value = '';
+      this.saveValue();
+      this.displayBooks();
+    }
+  }
+
+  // Remove book from array
+  removeBook(id) {
+    const newBooks = this.books.filter((book) => book.id !== id);
+    this.books = newBooks;
+    this.saveValue();
+    this.displayBooks();
+  }
+
+  // Display books
+  displayBooks() {
+    document.getElementById('book-list').innerHTML = '';
+    for (let i = 0; i < this.books.length; i += 1) {
+      document.getElementById('book-list').innerHTML += `
+    <li class="book-card">
+      <p>${this.books[i].title}</p>
+      <p>${this.books[i].author}</p>
+      <button id="remove${this.books[i].id}"class="remove" onclick="removeB()">Remove</button>
+    </li>`;
+    }
   }
 }
 
-getValue();
-window.onload = getValue;
-displayBooks();
+const myShelf = new Shelf();
+const addNewBook = new Book('title uno', 'author uno', 570968217);
+const addNewBook2 = new Book('title dos', 'author dos', 570668217);
+const addNewBook3 = new Book('title tres', 'author tres', 570963217);
+myShelf.books.push(addNewBook);
+myShelf.books.push(addNewBook2);
+myShelf.books.push(addNewBook3);
+
+myShelf.getValue();
+myShelf.displayBooks();
+
+const addBtn = document.querySelector('#add');
+addBtn.addEventListener('click', () => {
+  const currentTitle = document.querySelector('#title').value;
+  const currentAuthor = document.querySelector('#author').value;
+  myShelf.addBook(currentTitle, currentAuthor);
+});
+
+function removeB() {
+  const removeId = parseInt(window.event.target.id.replace('remove', ''), 10);
+  myShelf.removeBook(removeId);
+}
