@@ -54,10 +54,10 @@ class Shelf {
     document.getElementById('book-list').innerHTML = '';
     for (let i = 0; i < this.books.length; i += 1) {
       document.getElementById('book-list').innerHTML += `
-    <li class="book-card">
+    <li class="book-card d-flex justify-content-between">
       <p>${this.books[i].title}</p>
       <p>${this.books[i].author}</p>
-      <button id="remove${this.books[i].id}"class="remove" onclick="removeB()">Remove</button>
+      <button id="remove${this.books[i].id}"class="remove d-flex" onclick="removeB()">Remove</button>
     </li>`;
     }
   }
