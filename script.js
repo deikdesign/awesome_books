@@ -2,10 +2,12 @@ let books = [
   {
     title: 'Uno Lorem',
     author: 'Testero Testy',
+    id: 570968217,
   },
   {
     title: 'Dos Lorem',
     author: 'Testero Testy2',
+    id: 570968218,
   },
 ];
 
@@ -16,7 +18,7 @@ function displayBooks() {
   <li class="book-card">
     <p>${books[i].title}</p>
     <p>${books[i].author}</p>
-    <button id="remove${i}"class="remove" onclick="removeBook(this.id)">Remove</button>
+    <button id="remove${books[i].id}"class="remove" onclick="removeBook(this.id)">Remove</button>
   </li>`;
   }
 }
@@ -30,6 +32,7 @@ function addBook() {
   const newBook = {};
   newBook.title = document.getElementById('title').value;
   newBook.author = document.getElementById('author').value;
+  newBook.id = parseInt(Math.random() * 1000000000, 10);
   if (newBook.title !== '' && newBook.author !== '') {
     books.push(newBook);
     document.getElementById('title').value = '';
@@ -38,10 +41,14 @@ function addBook() {
     displayBooks();
   }
 }
+
 /* eslint-disable no-unused-vars */
+/* eslint-disable prefer-const */
+/* eslint-disable radix */
 function removeBook(id) {
-  const bookDeleted = id.replace('remove', '');
-  books.splice(bookDeleted, 1);
+  const bookDeleted = parseInt(id.replace('remove', ''));
+  let newBooks = books.filter((item) => item.id !== bookDeleted);
+  books = newBooks;
   catchValue();
   displayBooks();
 }
