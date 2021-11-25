@@ -53,11 +53,19 @@ class Shelf {
   displayBooks() {
     document.getElementById('book-list').innerHTML = '';
     for (let i = 0; i < this.books.length; i += 1) {
+      let bgColor;
+      if (i % 2 === 0) {
+        bgColor = 'bg-white';
+      } else {
+        bgColor = 'bg-dark bg-opacity-10';
+      }
       document.getElementById('book-list').innerHTML += `
-    <li class="book-card d-flex justify-content-between">
-      <p>${this.books[i].title}</p>
-      <p>${this.books[i].author}</p>
-      <button id="remove${this.books[i].id}"class="remove d-flex" onclick="removeB()">Remove</button>
+    <li class="book-card d-flex justify-content-between align-items-center w-100 ${bgColor}">
+      <div class="d-flex justify-content-between">
+        <p class="m-2 d-flex align-items-center">"${this.books[i].title}" by</p>
+        <p class="m-2 mx-0 d-flex align-items-center">${this.books[i].author}</p>
+      </div>
+        <div class="mx-1"><button id="remove${this.books[i].id}"class="remove d-flex px-3 bg-white" onclick="removeB()">Remove</button></div>
     </li>`;
     }
   }
