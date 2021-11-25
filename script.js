@@ -1,5 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-classes-per-file */
+/* eslint-disable max-len */
+/* eslint-disable no-undef */
+/* eslint-disable no-implied-eval */
+/* eslint-disable no-var */
+/* eslint-disable no-extend-native */
 
 class Book {
   constructor(title, author, id) {
@@ -123,38 +128,38 @@ function displayPage(link) {
 displayPage('list');
 
 // Clock on click - date and time
+Number.prototype.pa = function (digit) {
+  for (n = this.toString(); n.length < digit; n = 0 + n);
+  return n;
+};
+
 function updateClock() {
   const at = new Date();
   const daname = at.getDay();
-  const mont = at.getMonth();
-  const denum = at.getDate();
-  const yrr = at.getFullYear();
-  let hourr = at.getHours();
-  const min = at.getMinutes();
-  const sec = at.getSeconds();
-  let pe = 'AM';
+  mont = at.getMonth();
+  denum = at.getDate();
+  yrr = at.getFullYear();
+  hourr = at.getHours();
+  min = at.getMinutes();
+  sec = at.getSeconds();
+  pe = 'AM';
 
   if (hourr >= 12) {
     pe = 'PM';
   }
-  if (hourr == 0) {
+  if (hourr === 0) {
     hourr = 12;
   }
   if (hourr > 12) {
     hourr -= 12;
   }
 
-  Number.prototype.pa = function (digit) {
-    for (var n = this.toString(); n.length < digit; n = 0 + n);
-    return n;
-  };
-
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const id = ['days', 'monthly', 'daynumb', 'years', 'hours', 'minutes', 'seconds', 'ampm'];
   const values = [week[daname], months[mont], denum, yrr, hourr.pa(2), min.pa(2), sec, pe];
 
-  for (let i = 0; i < id.length; i++) document.getElementById(id[i]).firstChild.nodeValue = values[i];
+  for (let i = 0; i < id.length; i += 1) { document.getElementById(id[i]).firstChild.nodeValue = values[i]; }
 }
 
 function initClock() {
