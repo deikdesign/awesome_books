@@ -119,4 +119,45 @@ function displayPage(link) {
     addNewPage.classList.add('hide');
   }
 }
+
 displayPage('list');
+
+// Clock on click - date and time
+function updateClock() {
+  const at = new Date();
+  const daname = at.getDay();
+  const mont = at.getMonth();
+  const denum = at.getDate();
+  const yrr = at.getFullYear();
+  let hourr = at.getHours();
+  const min = at.getMinutes();
+  const sec = at.getSeconds();
+  let pe = 'AM';
+
+  if (hourr >= 12) {
+    pe = 'PM';
+  }
+  if (hourr == 0) {
+    hourr = 12;
+  }
+  if (hourr > 12) {
+    hourr -= 12;
+  }
+
+  Number.prototype.pa = function (digit) {
+    for (var n = this.toString(); n.length < digit; n = 0 + n);
+    return n;
+  };
+
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const id = ['days', 'monthly', 'daynumb', 'years', 'hours', 'minutes', 'seconds', 'ampm'];
+  const values = [week[daname], months[mont], denum, yrr, hourr.pa(2), min.pa(2), sec, pe];
+
+  for (let i = 0; i < id.length; i++) document.getElementById(id[i]).firstChild.nodeValue = values[i];
+}
+
+function initClock() {
+  updateClock();
+  window.setInterval('updateClock()', 1);
+}

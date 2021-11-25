@@ -14,7 +14,7 @@
     />
     <title>Document</title>
   </head>
-  <body>
+  <body onload="initClock()">
     <nav class="navbar px-2 border nav-pills">
       <span class="w-50 px-3">Awesome Books</span>
       <ul
@@ -54,6 +54,20 @@
         </li>
       </ul>
     </nav>
+    <div class="dateandtime d-flex justify-content-end m-4">
+      <div class="dates mx-3">
+          <span id="days">Day</span>,
+          <span id="monthly">Month</span>
+          <span id="daynumb">00</span>,
+          <span id="years">Year</span>
+      </div>
+      <div class="times">
+          <span id="hours">00</span>
+          <span id="minutes">00</span>
+          <span id="seconds">00</span>
+          <span id="ampm">AM</span>
+      </div>
+  </div>
     <section class="all-books mb-5" id="all-books">
       <h1 class="mx-auto text-center my-5">All Awesome Books</h1>
       <div class="bookshelf p-2 px-5 d-flex justify-content-center">
