@@ -111,7 +111,6 @@ function displayPage(link) {
     contactPage.classList.remove('d-flex');
     contactPage.classList.add('hide');
   } else if (link === 'contact') {
-    console.log(link);
     contactPage.classList.remove('hide');
     contactPage.classList.add('d-flex');
     listPage.classList.remove('d-flex');
@@ -120,5 +119,4 @@ function displayPage(link) {
     addNewPage.classList.add('hide');
   }
 }
-
 displayPage('list');
