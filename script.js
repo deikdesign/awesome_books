@@ -154,10 +154,12 @@ function updateClock() {
   const id = ['days', 'monthly', 'daynumb', 'years', 'hours', 'minutes', 'seconds', 'ampm'];
   const values = [week[daname], months[mont], denum, yrr, hourr.pa(2), min.pa(2), sec, pe];
 
-  for (let i = 0; i < id.length; i++) document.getElementById(id[i]).firstChild.nodeValue = values[i];
+  // eslint-disable-next-line max-len
+  for (let i = 0; i < id.length; i += 1) document.getElementById(id[i]).firstChild.nodeValue = values[i];
 }
 
 function initClock() {
   updateClock();
+  // eslint-disable-next-line no-implied-eval
   window.setInterval('updateClock()', 1);
 }
