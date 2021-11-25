@@ -61,11 +61,11 @@ class Shelf {
       }
       document.getElementById('book-list').innerHTML += `
     <li class="book-card d-flex justify-content-between align-items-center w-100 ${bgColor}">
-      <div class="d-flex justify-content-between">
-        <p class="m-2 d-flex align-items-center">"${this.books[i].title}" by</p>
-        <p class="m-2 mx-0 d-flex align-items-center">${this.books[i].author}</p>
+      <div class="d-flex justify-content-between mx-4">
+        <p class="m-3 mx-1 d-flex align-items-center">"${this.books[i].title}" by</p>
+        <p class="m-3 mx-0 d-flex align-items-center">${this.books[i].author}</p>
       </div>
-        <div class="mx-1"><button id="remove${this.books[i].id}"class="remove d-flex px-3 bg-white" onclick="removeB()">Remove</button></div>
+        <div class="mx-3"><button id="remove${this.books[i].id}"class="remove d-flex px-3 btn btn-danger" onclick="removeB()">Remove</button></div>
     </li>`;
     }
   }
@@ -93,3 +93,32 @@ function removeB() {
   const removeId = parseInt(window.event.target.id.replace('remove', ''), 10);
   myShelf.removeBook(removeId);
 }
+
+function displayPage(link) {
+  const listPage = document.getElementById('all-books');
+  const addNewPage = document.getElementById('add-new-page');
+  const contactPage = document.getElementById('contact-page');
+  if (link === 'list') {
+    listPage.classList.remove('hide');
+    contactPage.classList.remove('d-flex');
+    contactPage.classList.add('hide');
+    addNewPage.classList.remove('d-flex');
+    addNewPage.classList.add('hide');
+  } else if (link === 'add-new') {
+    addNewPage.classList.remove('hide');
+    listPage.classList.remove('d-flex');
+    listPage.classList.add('hide');
+    contactPage.classList.remove('d-flex');
+    contactPage.classList.add('hide');
+  } else if (link === 'contact') {
+    console.log(link);
+    contactPage.classList.remove('hide');
+    contactPage.classList.add('d-flex');
+    listPage.classList.remove('d-flex');
+    listPage.classList.add('hide');
+    addNewPage.classList.remove('d-flex');
+    addNewPage.classList.add('hide');
+  }
+}
+
+displayPage('list');

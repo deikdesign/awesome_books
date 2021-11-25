@@ -1,0 +1,9 @@
+
+.hide {
+    display: none !important;
+}
+
+footer {
+    position:absolute;
+    margin-bottom: 0;
+}
