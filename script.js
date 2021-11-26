@@ -1,11 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable max-classes-per-file */
-/* eslint-disable max-len */
-/* eslint-disable no-undef */
-/* eslint-disable no-implied-eval */
-/* eslint-disable no-var */
-/* eslint-disable no-extend-native */
-
 class Book {
   constructor(title, author, id) {
     this.title = title;
@@ -94,10 +87,10 @@ addBtn.addEventListener('click', () => {
   myShelf.addBook(currentTitle, currentAuthor);
 });
 
-function removeB() {
-  const removeId = parseInt(window.event.target.id.replace('remove', ''), 10);
-  myShelf.removeBook(removeId);
-}
+// function removeB() {
+//   const removeId = parseInt(window.event.target.id.replace('remove', ''), 10);
+//   myShelf.removeBook(removeId);
+// }
 
 function displayPage(link) {
   const listPage = document.getElementById('all-books');
@@ -127,22 +120,23 @@ function displayPage(link) {
 
 displayPage('list');
 
-// Clock on click - date and time
-Number.prototype.pa = function (digit) {
-  for (n = this.toString(); n.length < digit; n = 0 + n);
-  return n;
-};
+function formatPa(num) {
+  if (num < 10) {
+    return `0${num}`;
+  }
+  return `${num}`;
+}
 
 function updateClock() {
   const at = new Date();
   const daname = at.getDay();
-  mont = at.getMonth();
-  denum = at.getDate();
-  yrr = at.getFullYear();
-  hourr = at.getHours();
-  min = at.getMinutes();
-  sec = at.getSeconds();
-  pe = 'AM';
+  const mont = at.getMonth();
+  const denum = at.getDate();
+  const yrr = at.getFullYear();
+  let hourr = at.getHours();
+  const min = at.getMinutes();
+  const sec = at.getSeconds();
+  let pe = 'AM';
 
   if (hourr >= 12) {
     pe = 'PM';
@@ -157,13 +151,17 @@ function updateClock() {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const id = ['days', 'monthly', 'daynumb', 'years', 'hours', 'minutes', 'seconds', 'ampm'];
-  const values = [week[daname], months[mont], denum, yrr, hourr.pa(2), min.pa(2), sec, pe];
+  const values = [week[daname], months[mont], denum, yrr, formatPa(hourr), formatPa(min), sec, pe];
 
-  for (let i = 0; i < id.length; i += 1) { document.getElementById(id[i]).firstChild.nodeValue = values[i]; }
+  for (let i = 0; i < id.length; i += 1) {
+    document.getElementById(id[i]).firstChild.nodeValue = values[i];
+  }
 }
 
 function initClock() {
   updateClock();
   // eslint-disable-next-line no-implied-eval
-  window.setInterval('updateClock()', 1);
+  window.setInterval(updateClock, 1);
 }
+
+window.onload = initClock;
